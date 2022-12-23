@@ -76,18 +76,13 @@ fun calculateScore(enemyPlay: Play, myPlay: Play): Int {
 }
 
 fun main() {
-    fun sumPoints(points: List<Int>): Int {
-        return points.reduce { acc, point -> acc + point }
-    }
-
     fun part1(input: List<String>): Int {
         val plays =
             input
                 .map { it.split(" ") }
                 .map { play -> listOf(parsePlayPart1(play[0]), parsePlayPart1(play[1])) }
-        val points = plays.map { play -> calculateScore(play[0], play[1]) }
 
-        return sumPoints(points)
+        return plays.sumOf { play -> calculateScore(play[0], play[1]) }
     }
 
     fun part2(input: List<String>): Int {
@@ -95,9 +90,8 @@ fun main() {
             input
                 .map { it.split(" ") }
                 .map { play -> listOf(parsePlayPart1(play[0]), parsePlayPart2(play[0], play[1])) }
-        val points = plays.map { play -> calculateScore(play[0], play[1]) }
 
-        return sumPoints(points)
+        return plays.sumOf { play -> calculateScore(play[0], play[1]) }
     }
 
     val input = readInput("Day02")
